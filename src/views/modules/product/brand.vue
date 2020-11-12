@@ -8,7 +8,7 @@
       <el-form-item>
         <el-input
           v-model="dataForm.key"
-          placeholder="参数名"
+          placeholder="请输入品牌名称"
           clearable
         ></el-input>
       </el-form-item>
@@ -63,6 +63,9 @@
         align="center"
         label="品牌logo地址"
       >
+        <template slot-scope="scope">
+          <img :src="scope.row.logo" style="width: 100px; height: 80px" />
+        </template>
       </el-table-column>
       <el-table-column
         prop="descript"
@@ -255,10 +258,10 @@ export default {
       //从data中解构出brandId和showStatus
       let { brandId, showStatus } = data;
       this.$http({
-        url: this.$http.adornUrl("/product/brand/update"),
+        url: this.$http.adornUrl("/product/brand/update/status"),
         method: "post",
         data: this.$http.adornData(
-          { brandId: brandId, showStatus: showStatus},
+          { brandId: brandId, showStatus: showStatus },
           false
         ),
       }).then(({ data }) => {
